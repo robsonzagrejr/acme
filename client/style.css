@@ -88,14 +88,13 @@ img {
 .account {
     background-color: #dd709a;
     width: 100%;
-    height: 10%;
+    height: 20%;
     vertical-align: middle;
     overflow-x: auto;
 }
 
 .search{
-    margin-left: 55.5%;
-
+    margin-left: 48%;
 }
 
 .form-div {
@@ -117,7 +116,7 @@ img {
 /* ID Styles */
 #searched-polls {
     height:87%;
-    overflow=auto;
+    overflow:auto;
 }
 
 #super-wrapper {

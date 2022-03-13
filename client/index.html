@@ -23,14 +23,13 @@
                         <img class="user-img" src="assets/user-profile.png">
                         <button class="big-button btn-connect" id="connect">Connect</button>
                         <h3 class="account">Account: <span id="account"></span></h3>
-                        <br>
                         <center>
-                            <button
+                            <a
                                 class="big-button "
-                                onclick="window.location.href='create_poll.html'"
+                                href="create_poll.html"
                             >
                                 Ask!
-                            </button>
+                            </a>
                         </center>
 
                     </div>
@@ -38,34 +37,12 @@
                         <div class="search">
                             <input class="input" type="text" id="search-poll"/>
                             <button class="medium-button btn-search" id="search">Search</button> 
+                            <button class="small-button" id="refresh"
+                                onclick="loadPolls()">⟳</button> 
                         </div>
                         <div id="searched-polls">
                             
                         </div>
-                    </div>
-
-                    <form id="signup">
-                        <h2> Create Pool </h2>
-                        <label>Question:</label>
-                        <input type="text" id="pool-question" name="question" placeholder="Make a good question" />
-                        <label>Initial Amount:</label>
-                        <input type="number" min=0 step=1 id="pool-amount" name="amount" />
-                        <label>Vote Fee:</label>
-                        <input type="number" min=0 step=1 id="pool-vote-amount"name="vote-amount" />
-                        <label>Date End:</label>
-                        <input type="date" id="pool-dateend"name="dateend" />
-
-                        <button type="subimit">Create Pull</button>
-                    </form>
-                    <br>
-                    <form id="getpoll">
-                        <h2> Get Pool </h2>
-                        <label>Poll id:</label>
-                        <input type="number" min=0 step=1 id="pool-id"name="id" />
-                        <button type="subimit">Get Pull</button>
-                    </form>
-                    <h2>INFO</h2>
-                    <div id="poll-info">
                     </div>
                 </div>
             </div>

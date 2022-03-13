@@ -7,7 +7,6 @@ contract ACME {
         bool open;
         address creator; // Criador da enquete
         uint initial_amount; // Montante inicial na enquete
-        uint vote_fee; // Taxa de voto
         string question; // A pergunta da enquete
         string[] options; // As opções de resposta
         uint time_start; // Timestamp de início
@@ -49,11 +48,13 @@ contract ACME {
     mapping(uint => ParticipantsRecord) private participations;
     uint n_polls = 0; // o identificador das enquetes é um contador
 
+    uint vote_fee = 1000000000000000;
 
-    function createPoll(uint _vote_fee, string memory _question, uint _valid_period) public payable 
+
+    function createPoll(string memory _question, uint _valid_period) public payable 
         returns (Poll memory) {
         uint ts = block.timestamp;
-        polls[n_polls] = Poll({open: true, creator: msg.sender, initial_amount: msg.value, vote_fee: _vote_fee, question: _question,
+        polls[n_polls] = Poll({open: true, creator: msg.sender, initial_amount: msg.value, question: _question,
                                options: new string[](0), time_start: ts, time_end: ts + _valid_period});
         n_polls = n_polls + 1;
         return polls[n_polls - 1];
@@ -76,6 +77,80 @@ contract ACME {
         return current_polls;
     }
 
+    // Encontramos essa função para achar uma palavra em um string
+    function contains (string memory what, string memory where) private pure returns (bool) {
+        bytes memory whatBytes = bytes (what);
+        bytes memory whereBytes = bytes (where);
+
+        if (whereBytes.length < whatBytes.length) {
+            return false;
+        }
+
+        // Tratar como lowercase
+
+        for (uint i = 0; i < whatBytes.length; i++) {
+			if ((whatBytes[i] >= 0x41) && (whatBytes[i] <= 0x5A)) {
+				whatBytes[i] = bytes1(uint8(whatBytes[i]) + 0x20);
+			} else {
+				whatBytes[i] = whatBytes[i];
+			}
+		}
+
+        for (uint i = 0; i < whereBytes.length; i++) {
+			if ((whereBytes[i] >= 0x41) && (whereBytes[i] <= 0x5A)) {
+				whereBytes[i] = bytes1(uint8(whereBytes[i]) + 0x20);
+			} else {
+				whereBytes[i] = whereBytes[i];
+			}
+		}
+
+
+        bool found = false;
+
+
+        for (uint i = 0; i <= whereBytes.length - whatBytes.length; i++) {
+            bool flag = true;
+            for (uint j = 0; j < whatBytes.length; j++)
+                if (whereBytes [i + j] != whatBytes [j]) {
+                    flag = false;
+                    break;
+                }
+            if (flag) {
+                found = true;
+                break;
+            }
+        }
+    
+        return found;
+    }
+
+    function searchPollsWithWord(string memory word) public view 
+        returns (Poll[] memory) {
+        bool[] memory polls_containing = new bool[](n_polls);
+
+        uint idx = 0;
+
+        for (uint i = 0; i < n_polls; i++) {
+            if (contains(word, polls[i].question)) {
+                polls_containing[i] = true;
+                idx += 1;
+            }
+        }
+
+        Poll[] memory result_polls = new Poll[](idx);
+
+        idx = 0;
+
+        for (uint i = 0; i < n_polls; i++) {
+            if (polls_containing[i]) {
+                result_polls[idx] = polls[i];
+                idx += 1;
+            }
+        }
+        return result_polls;
+    }
+
+
 
     function addOption(uint _id, string memory _option) public {
         Poll storage poll = polls[_id];
@@ -95,7 +170,7 @@ contract ACME {
         require(_id_poll < n_polls);                                // enquete existe
         require(polls[_id_poll].open);                              // enquete aberta
         require(_id_option < polls[_id_poll].options.length);       // opção de resposta existe
-        require(msg.value == polls[_id_poll].vote_fee);             // pagando a taxa para votos
+        require(msg.value == vote_fee);                             // pagando a taxa para votos
         require(block.timestamp > polls[_id_poll].time_start && block.timestamp < polls[_id_poll].time_end);
                                                                     // voto no período de tempo aceitável
         require(!participations[_id_poll].participants[msg.sender]);// usuário não votou/apostou
@@ -173,7 +248,7 @@ contract ACME {
     // Resultado da enquete
     // Retorna um array de booleanos, em que uma posição é true
     // se a opção correspondente tem o número máximo de votos
-    function getPollResult(uint _id_poll) public view 
+    function getPollResult(uint _id_poll) private view 
         returns (bool[] memory) {
         bool[] memory result = new bool[](polls[_id_poll].options.length);
 
@@ -206,7 +281,7 @@ contract ACME {
         uint prize_money = 0; 
 
         // dinheiro a ser reembolsado (inicial + taxas dos votos + apostas dos vencedores)
-        uint refund_money = polls[_id_poll].initial_amount + votes[_id_poll].n_votes * polls[_id_poll].vote_fee;
+        uint refund_money = polls[_id_poll].initial_amount + votes[_id_poll].n_votes * vote_fee;
 
         for (uint i = 0; i < bets[_id_poll].n_bets; i++) {
             if (!result[bets_in_storage[i].id_option]) {
@@ -229,7 +304,7 @@ contract ACME {
 
         // Queremos que os que apostaram mais sejam mais recompensados
         // total_bet_winners é o total apostado pelos vencedores
-        uint total_bet_winners = refund_money - votes[_id_poll].n_votes * polls[_id_poll].vote_fee - polls[_id_poll].initial_amount;
+        uint total_bet_winners = refund_money - votes[_id_poll].n_votes * vote_fee - polls[_id_poll].initial_amount;
 
         uint total_prize_money = prize_money;
         address payable to;
@@ -270,9 +345,9 @@ contract ACME {
                 // Os usuários que votaram simplesmente recebem o dinheiro de volta,
                 // mais um pouco do montante dos que perderam
                 reward = total_prize_money / votes[_id_poll].n_votes;
-                value_to_transfer = polls[_id_poll].vote_fee + reward;
+                value_to_transfer = vote_fee + reward;
 
-                refund_money -= polls[_id_poll].vote_fee;
+                refund_money -= vote_fee;
                 prize_money -= reward;
                 
                 // Mandando para cada um dos eleitores
