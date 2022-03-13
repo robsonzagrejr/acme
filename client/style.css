@@ -1,0 +1,162 @@
+/* Tag Styles */
+body {
+    background-color: #e697d2;
+    /*background-image: url('images/pipes.png');*/
+    font-family: 'Arial', sans-serif;
+    #text-align: center;
+    color: white;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Classes */
+.layout {
+    display: block;
+    position: absolute;
+    z-index:-1;
+}
+.content {
+    padding-top: 278px;
+    padding: 278px 40px 0px 40px;
+    width:620px;
+    height: 568px;
+}
+.home-acmechan {
+    width:51.5%;
+    float: left;
+    height:55%;
+}
+.home-user{
+    float: left;
+    width:46.5%;
+    height:54%;
+    padding: 1% 0 0 1.5%;
+}
+.home-polls{
+    float: left;
+    width:97%;
+    height:43%;
+    padding: 2% 1.5% 0 1.5%;
+}
+.acmechan {
+    margin-top: -7px;
+}
+
+.user-img {
+    width: 38%;
+    height: 43%;
+}
+
+.big-button {
+    background-color: #dd709a;
+    color: #ffffff;
+    text-align: center;
+    font-size:26px;
+    width: 124px;
+    height: 55px;
+}
+
+.medium-button{
+    background-color: #dd709a;
+    color: #ffffff;
+    text-align: center;
+    font-size:18px;
+    width: 78px;
+    height: 30px;
+}
+
+.small-button{
+    background-color: #dd709a;
+    color: #ffffff;
+    text-align: center;
+    font-size:18px;
+    width: 38px;
+    height: 30px;
+}
+
+.btn-connect {
+    margin: 5% 0 0 2.5%;
+    position: absolute;
+}
+
+.account {
+    background-color: #dd709a;
+    width: 100%;
+    height: 10%;
+    vertical-align: middle;
+    overflow-x: auto;
+}
+
+.search{
+    margin-left: 55.5%;
+
+}
+
+.form-div {
+    height:70%;
+    overflow-y:auto;
+}
+
+.form-title {
+    color: #cd3b76;
+}
+
+.form-label {
+    color: #891688;
+    font-size: 20px;
+    margin: 0 0 0 10%;
+}
+
+
+/* ID Styles */
+#searched-polls {
+    height:87%;
+    overflow=auto;
+}
+
+#super-wrapper {
+    float: left;
+    #position: absolute;
+    top: 30px;
+    width: 100%;
+}
+
+#wrapper {
+    width: 670px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Animations */
+.clouds {
+    opacity: 0.7;
+    width: 100%;
+    height: 362px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 70px;
+    margin-bottom: 400px;
+}
+
+.clouds > div {
+    width: 2526px;
+    /*background: url(images/cloud.png);*/
+    height: 100%;
+    transform: translate3d(0, 0, 0);
+}
+
+.clouds .mover-1 {
+    animation: moveSlideshow 15s linear infinite;
+}
+
+@keyframes moveSlideshow {
+    100% {
+        transform: translateX(-20%);
+    }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.6">
+        <title>? ACME ?</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="super_wrapper">
+            <div id="wrapper">
+                <div class="layout">
+                    <img src="assets/acme_home_layout.png">
+                </div>
+                <div class="content">
+                    <div class="home-acmechan">
+                        <iframe width="314" height="321" scrolling="no"
+                            src="https://gifypet.neocities.org/pet/pet.html?name=ACMEchan&dob=1647187308&gender=f&element=Air&pet=anime.gif&map=tree.jpg&background=&tablecolor=%23ff00ae&textcolor=black"
+                            frameborder="0" class="acmechan">
+                        </iframe>
+                    </div>
+                    <div class="home-user">
+                        <img class="user-img" src="assets/user-profile.png">
+                        <button class="big-button btn-connect" id="connect">Connect</button>
+                        <h3 class="account">Account: <span id="account"></span></h3>
+                        <br>
+                        <center>
+                            <button
+                                class="big-button "
+                                onclick="window.location.href='create_poll.html'"
+                            >
+                                Ask!
+                            </button>
+                        </center>
+
+                    </div>
+                    <div class="home-polls">
+                        <div class="search">
+                            <input class="input" type="text" id="search-poll"/>
+                            <button class="medium-button btn-search" id="search">Search</button> 
+                        </div>
+                        <div id="searched-polls">
+                            
+                        </div>
+                    </div>
+
+                    <form id="signup">
+                        <h2> Create Pool </h2>
+                        <label>Question:</label>
+                        <input type="text" id="pool-question" name="question" placeholder="Make a good question" />
+                        <label>Initial Amount:</label>
+                        <input type="number" min=0 step=1 id="pool-amount" name="amount" />
+                        <label>Vote Fee:</label>
+                        <input type="number" min=0 step=1 id="pool-vote-amount"name="vote-amount" />
+                        <label>Date End:</label>
+                        <input type="date" id="pool-dateend"name="dateend" />
+
+                        <button type="subimit">Create Pull</button>
+                    </form>
+                    <br>
+                    <form id="getpoll">
+                        <h2> Get Pool </h2>
+                        <label>Poll id:</label>
+                        <input type="number" min=0 step=1 id="pool-id"name="id" />
+                        <button type="subimit">Get Pull</button>
+                    </form>
+                    <h2>INFO</h2>
+                    <div id="poll-info">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <audio autoplay="" loop="">
+            <source src="audio/power_of_love2.ogg" type="audio/ogg">
+            </audio>-->
+    </body>
+    <script type="module" src="index.js"></script>
+</html>
+

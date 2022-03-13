@@ -1,0 +1,17 @@
+{
+  "name": "acme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "robson zagre junior $ wesly carmesini ataide",
+  "license": "ISC",
+  "devDependencies": {
+  }
+}
