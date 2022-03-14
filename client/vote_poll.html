@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.6">
+        <title>? ACME ?</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="super_wrapper">
+            <div id="wrapper">
+                <div class="layout">
+                    <img src="assets/acme_form_layout.png">
+                </div>
+                <div class="content">
+                    <form class="form-div" id="form-poll-vote">
+                        <center>
+                            <h1 class="form-title"> Vote Poll </h1>
+                        </center>
+                        <label class="form-label"><b>Question:</b></label>
+                        <div id="question" style="margin-left:10%"> </div>
+                        <br>
+                        <br>
+                        <label class="form-label"><b>Options:</b></label>
+                        <br>
+                        <textarea class="form-label" id="options" readonly></textarea>
+                        <br>
+                        <br>
+                        <label class="form-label"><b>Vote:</b></label>
+                        <br>
+                        <input type=number min=0 step=1 class="form-label" id="vote"/>
+                        
+                        <center>
+                            <button class="big-button" type="submit">Vote</button>
+                        </center>
+                    </form>
+                    <div class="output">
+                        <div id="form-output">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <audio autoplay="" loop="">
+            <source src="audio/power_of_love2.ogg" type="audio/ogg">
+            </audio>-->
+    </body>
+    <script type="module" src="index.js"></script>
+</html>
+

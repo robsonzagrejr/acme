@@ -26,6 +26,7 @@ img {
     padding: 278px 40px 0px 40px;
     width:620px;
     height: 568px;
+    z-index:1;
 }
 .home-acmechan {
     width:51.5%;
@@ -110,6 +111,32 @@ img {
     color: #891688;
     font-size: 20px;
     margin: 0 0 0 10%;
+}
+
+.poll-question {
+    color:#86166e;
+    width: 75%;
+    overflow-x:auto;
+}
+
+.poll-vote-btn {
+    color: #86166e;
+    margin-left: 10px;
+    background-color:#ffffff;
+}
+
+.poll-bet-btn {
+    color: #86166e;
+    margin-left: 10px;
+    background-color:#ffffff;
+}
+
+.poll-banner {
+    background-color: #dd709a;
+    border: 4px dashed #ffffff;
+    width: 97%;
+    overflow-x: auto;
+    padding: 5px;
 }
 
 
