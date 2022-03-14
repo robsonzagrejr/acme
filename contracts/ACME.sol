@@ -52,12 +52,12 @@ contract ACME {
 
 
     function createPoll(string memory _question, uint _valid_period) public payable 
-        returns (Poll memory) {
+        returns (uint) {
         uint ts = block.timestamp;
         polls[n_polls] = Poll({open: true, creator: msg.sender, initial_amount: msg.value, question: _question,
                                options: new string[](0), time_start: ts, time_end: ts + _valid_period});
         n_polls = n_polls + 1;
-        return polls[n_polls - 1];
+        return (n_polls - 1);
     }
 
 
